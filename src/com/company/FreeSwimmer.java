@@ -1,4 +1,6 @@
 package com.company;
+import java.util.*;
+import java.io.*;
 
 public class FreeSwimmer extends Member {
     private String type;
@@ -13,5 +15,11 @@ public class FreeSwimmer extends Member {
 
     public void setType(String type) {
         this.type = type;
+    }
+    public ArrayList<Member> addFreeSwimmer(ArrayList<Member> memberList) throws IOException{
+        String type = "Recreational swimmer";
+        super.addMember(memberList);
+        setType(type);
+        return memberList;
     }
 }

@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class Member {
     private String name;
@@ -50,7 +51,7 @@ public class Member {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    public ArrayList<Member> addMember(ArrayList<Member> memberList){
+    public ArrayList<Member> addMember(ArrayList<Member> memberList)throws IOException{
         Scanner input = new Scanner(System.in);
         System.out.println("Enter name: ");
         String nameT = input.nextLine();
@@ -63,7 +64,20 @@ public class Member {
                     Enter false for passive membership""");
         boolean status = input.nextBoolean();
         Member memberAdd = new Member(nameT, age, CPRnr, status);
+        //Skriver til fil
+        FileWriter fileWriter = new FileWriter("Memberlist", true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(memberAdd + "\n");
+        bufferedWriter.close();
+        fileWriter.close();
         memberList.add(memberAdd);
+        System.out.println("Do you want to see a list of all members?");
+        String answer = input.nextLine();
+        if(answer.equalsIgnoreCase("yes")){
+            for (int i = 0; i < memberList.size(); i++) {
+                System.out.println(memberList.get(i));
+            }
+        }
         return memberList;
     }
     public void editMember(){
