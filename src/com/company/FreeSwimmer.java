@@ -4,9 +4,12 @@ import java.io.*;
 
 public class FreeSwimmer extends Member {
     private String type;
-    public FreeSwimmer(String name, int age, int CPR, boolean status, String type){
-        super(name, age, CPR, status);
+    public FreeSwimmer(String name, int age, String CPR, boolean status, String member, String type){
+        super(name, age, CPR, status, member);
         this.type = type;
+    }
+    public FreeSwimmer(){
+
     }
 
     public String getType() {
@@ -16,10 +19,16 @@ public class FreeSwimmer extends Member {
     public void setType(String type) {
         this.type = type;
     }
+
     public ArrayList<Member> addFreeSwimmer(ArrayList<Member> memberList) throws IOException{
-        String type = "Recreational swimmer";
+        Scanner input = new Scanner(System.in);
         super.addMember(memberList);
-        setType(type);
+        FreeSwimmer addSwimmer = new FreeSwimmer(memberList.get(memberList.size()-1).getName(), memberList.get(memberList.size()-1).getAge(),
+                memberList.get(memberList.size()-1).getCPR(), true, memberList.get(memberList.size()-1).getStartMembership(), "Recreational swimmer");
+        System.out.println(addSwimmer);
         return memberList;
+    }
+    public String toString(){
+        return "Name: " + getName() + "\nAge: " + getAge() + "\nSwimmer: " + type + "\n*********************************";
     }
 }

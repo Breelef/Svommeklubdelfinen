@@ -13,8 +13,8 @@ public class CompSwimmer extends Member{
     private String practiceDate;
     private String compDate;
 
-    public CompSwimmer(String name, int age, int CPR, boolean status, String st, double bestCT, double bestTT, String cName, int place, String pDate, String cDate){
-        super(name, age, CPR, status);
+    public CompSwimmer(String name, int age, String CPR, boolean status, String member, String st, double bestCT, double bestTT, String cName, int place, String pDate, String cDate){
+        super(name, age, CPR, status, member);
         swimType = st;
         bestCompTime = bestCT;
         bestTrainingTime = bestTT;
@@ -81,7 +81,144 @@ public class CompSwimmer extends Member{
     public void setCompDate(String compDate) {
         this.compDate = compDate;
     }
-    public ArrayList<CompSwimmer> addMember(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException {
+    public ArrayList<CompSwimmer> addCompSwimmer(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException {
+        Scanner input = new Scanner(System.in);
+        super.addMember(memberList);
+        int index = memberList.size();
+        System.out.println("Enter swimtype: ");
+        String swimT = input.next();
+        System.out.println("Enter best competition time: ");
+        double compTime = input.nextDouble();
+        System.out.println("Enter placement at the competition");
+        int place = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter competition date for the best time: ");
+        String compDate = input.nextLine();
+        System.out.println("Enter name of competition: ");
+        String compName = input.nextLine();
+        System.out.println("Enter best practice time: ");
+        double pracTime = input.nextDouble();
+        input.nextLine();
+        System.out.println("Enter practice date for the best time: ");
+        String pracDate = input.nextLine();
+        CompSwimmer compAdd = new CompSwimmer(memberList.get(index - 1).getName(), memberList.get(index-1).getAge(),
+                memberList.get(index-1).getCPR(), true, memberList.get(index - 1).getStartMembership(), swimT, compTime, pracTime, compName, place, pracDate, compDate);
+        System.out.println(compAdd);
+        //Skriver til fil
+        FileWriter fileWriter = new FileWriter("competitionSwimmers", true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(compAdd + "\n");
+        bufferedWriter.close();
+        fileWriter.close();
+        compList.add(compAdd);
+        System.out.println("Want to see a list of all the competition swimmers?");
+        String answer = input.nextLine();
+        if(answer.equalsIgnoreCase("yes")){
+            for (int i = 0; i < compList.size(); i++) {
+                System.out.println(compList.get(i));
+            }
+        }
+        return compList;
+    }
+    public ArrayList<CompSwimmer> addToArrays(ArrayList<CompSwimmer> compList)throws IOException{
+        FileReader fr = new FileReader("competitionSwimmers");
+        BufferedReader br = new BufferedReader(fr);
+        String useMe = "";
+        String Name = "";
+        int age = 0;
+        String CPR = "";
+        String swimtype = "";
+        double bestCompTime = 0.0;
+        double bestPracTime = 0.0;
+        String compName = "";
+        int placement = 0;
+        String pracDate = "";
+        String compDate = "";
+        String memberDate = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (line.contains("Name")) {
+                Name = line.split(":")[1].trim();
+            }
+            if (line.contains("Age")) {
+                useMe = line.split(":")[1].trim();
+                age = Integer.parseInt(useMe);
+            }
+            if (line.contains("Swim Type")) {
+                swimtype = line.split(":")[1].trim();
+            }
+            if (line.contains("Best training time")) {
+                useMe = line.split(":")[1].trim();
+                bestPracTime = Double.parseDouble(useMe);
+            }
+            if (line.contains("Training date")) {
+                pracDate = line.split(":")[1].trim();
+            }
+            if (line.contains("Best competition time")) {
+                useMe = line.split(":")[1].trim();
+                bestCompTime = Double.parseDouble(useMe);
+            }
+            if (line.contains("Competition name")) {
+                compName = line.split(":")[1].trim();
+            }
+            if(line.contains("Placement")){
+                useMe = line.split(":")[1].trim();
+                placement = Integer.parseInt(useMe);
+            }
+            if(line.contains("Competition date")){
+               compDate = line.split(":")[1].trim();
+            }
+            if(line.contains("CPR-NR")){
+                CPR = line.split(":")[1].trim();
+            }
+            if(line.contains("Membership date")){
+                memberDate = line.split(":")[1].trim();
+            }
+            if(line.contains("*********************************")){
+                CompSwimmer swimmerAdd = new CompSwimmer(Name, age, CPR, true, memberDate, swimtype, bestCompTime, bestPracTime,
+                        compName, placement, pracDate, compDate);
+                compList.add(swimmerAdd);
+            }
+        }
+        br.close();
+        fr.close();
+        return compList;
+    }
+    public String toString(){
+        /*String g = "";
+        int price = 0;
+        if(isStatus()){
+            g = "Active membership";
+        }else{
+            g = "Passive membership";
+        }
+        if(getAge() < 18){
+            price = 1000;
+        }else{
+            price = 1600;
+            if(getAge() >= 60){
+                price = 1200;
+            }
+        }*/
+        return "Name: " + super.getName() + "\nAge: " + super.getAge() + "\nSwim Type: " + swimType + "\nBest training time: "
+                + bestTrainingTime + "\nTraining date: " + practiceDate + "\nBest competition time: " + bestCompTime + "\nName of competition: "
+                + compName + "\nPlacement: " + placement + "\nCompetition date: " + compDate + "\nCPR-NR: " + super.getCPR() + "\n*********************************";
+    }
+}
+
+/*
+Scanner input = new Scanner(System.in);
+        System.out.println("Enter name: ");
+        String nameT = input.nextLine();
+        System.out.println("Enter age: ");
+        int age = input.nextInt();
+        System.out.println("Enter CPR-nr: ");
+        int CPRnr = input.nextInt();
+        System.out.println("""
+                    Enter true for active membership
+                    Enter false for passive membership""");
+        boolean status = input.nextBoolean();
+        public ArrayList<CompSwimmer> addMember(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException {
         Scanner input = new Scanner(System.in);
         super.addMember(memberList);
         System.out.println("Enter swimtype: ");
@@ -90,16 +227,19 @@ public class CompSwimmer extends Member{
         double compTime = input.nextDouble();
         System.out.println("Enter placement at the competition");
         int place = input.nextInt();
+        input.nextLine();
         System.out.println("Enter competition date for the best time: ");
         String compDate = input.nextLine();
         System.out.println("Enter name of competition: ");
         String compName = input.nextLine();
         System.out.println("Enter best practice time: ");
         double pracTime = input.nextDouble();
+        input.nextLine();
         System.out.println("Enter practice date for the best time: ");
         String pracDate = input.nextLine();
         CompSwimmer memberAdd = new CompSwimmer(super.getName(), super.getAge(), super.getCPR(), super.isStatus(), swimT, compTime,
                 pracTime, compName, place, pracDate, compDate);
+        System.out.println(memberAdd);
         //Skriver til fil
         FileWriter fileWriter = new FileWriter("compSwimmers", true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -116,80 +256,4 @@ public class CompSwimmer extends Member{
         }
         return compList;
     }
-    public ArrayList<CompSwimmer> addToArray(ArrayList<CompSwimmer> compList)throws IOException{
-        FileReader fr = new FileReader("compSwimmers");
-        BufferedReader br = new BufferedReader(fr);
-        String useMe = "";
-        String Name = "";
-        int age = 0;
-        int CPR = 0;
-        boolean status = true;
-        String swimtype = "";
-        double bestCompTime = 0.0;
-        double bestPracTime = 0.0;
-        String compName = "";
-        int placement = 0;
-        String pracDate = "";
-        String compDate = "";
-        String line;
-        while ((line = br.readLine()) != null) {
-            if (line.contains("Name")) {
-                Name = line.split(":")[1].trim();
-            }
-            if (line.contains("Model")) {
-                useMe = line.split(":")[1].trim();
-                age = Integer.parseInt(useMe);
-            }
-            if (line.contains("Benzin type")) {
-                useMe = line.split(":")[1].trim();
-                CPR = Integer.parseInt(useMe);
-            }
-            if (line.contains("Størrelse på bilen")) {
-                swimtype = line.split(":")[1].trim();
-            }
-            if (line.contains("Registreringsnummer")) {
-                useMe = line.split(":")[1].trim();
-                bestCompTime = Double.parseDouble(useMe);
-            }
-            if (line.contains("Registreringsdato")) {
-                useMe = line.split(":")[1].trim();
-                bestPracTime = Double.parseDouble(useMe);
-
-            }
-            if (line.contains("Bilen har kørt")) {
-                compName = line.split(":")[1].trim();
-            }
-            if(line.contains("Bilen har kørt"){
-                useMe = line.split(":")[1].trim();
-                placement = Integer.parseInt(useMe);
-            }
-            if(line.contains("Bilen har kørt"){
-               pracDate = line.split(":")[1].trim();
-            }
-            if(line.contains("Bilen har kørt"){
-                compDate = line.split(":")[1].trim();
-            }
-            if(line.contains("*********************************")){
-                CompSwimmer swimmerAdd = new CompSwimmer(Name, age, CPR, status, swimtype, bestCompTime, bestPracTime,
-                        compName, placement, pracDate, compDate);
-                compList.add(swimmerAdd);
-            }
-        }
-        br.close();
-        fr.close();
-    }
-}
-
-/*
-Scanner input = new Scanner(System.in);
-        System.out.println("Enter name: ");
-        String nameT = input.nextLine();
-        System.out.println("Enter age: ");
-        int age = input.nextInt();
-        System.out.println("Enter CPR-nr: ");
-        int CPRnr = input.nextInt();
-        System.out.println("""
-                    Enter true for active membership
-                    Enter false for passive membership""");
-        boolean status = input.nextBoolean();
  */
