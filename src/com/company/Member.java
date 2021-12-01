@@ -147,12 +147,16 @@ public class Member {
         }else{
             g = "Passive membership";
         }
-        if(age < 18){
-            price = 1000;
+        if(g.equals("Passive membership")){
+            price = 500;
         }else{
-            price = 1600;
-            if(age >= 60){
-                price = 1200;
+            if(age < 18){
+                price = 1000;
+            }else{
+                price = 1600;
+                if(age >= 60){
+                    price = 1200;
+                }
             }
         }
         return "Name: " + name + "\nAge: " + age + "\nCPR-nr: " + CPR + "\nMembership: " + g + "" +

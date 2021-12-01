@@ -1,6 +1,6 @@
 Name: Kawan
 Age: 25
-Swim Type: Backcrawl
+Swim Type: Backstroke
 Best training time: 17.55
 Training date: 20/11/2020
 Best competition time: 18.33
@@ -11,7 +11,7 @@ CPR-NR: 290696-2311
 *********************************
 Name: Machinius
 Age: 22
-Swim Type: Breast
+Swim Type: Breaststroke
 Best training time: 17.01
 Training date: 12/01/2021
 Best competition time: 17.22
@@ -33,27 +33,29 @@ CPR-NR: 160601-5617
 *********************************
 Name: Jonny
 Age: 22
-Swim Type: 
+Swim Type: Butterfly
 Best training time: 19.55
 Training date: 30/11/2021
-Competition name: 19.55
-Name of competition: Jonny's tid
+Best competition time: 19.55
+Competition name: Jonny's tid
 Placement: 2
-Competition date: 30/11/2021CPR-NR: 290699-2311
+Competition date: 30/11/2021
+CPR-NR: 290699-2311
 *********************************
 Name: Bent
 Age: 22
-Swim Type: 
+Swim Type: Crawl
 Best training time: 16.55
 Training date: 17/02/2021
-Competition name: 17.33
-Name of competition: Bente's stævne
+Best competition time: 17.33
+Competition name: Bente's stævne
 Placement: 2
-Competition date: 16/03/2021CPR-NR: 280699-2355
+Competition date: 16/03/2021
+CPR-NR: 280699-2355
 *********************************
 Name: BUFU
 Age: 22
-Swim Type: 
+Swim Type: Backstroke
 Best training time: 17.11
 Training date: 17/02/2021
 Best competition time: 17.55
@@ -64,7 +66,7 @@ CPR-NR: 210399-3411
 *********************************
 Name: Eml
 Age: 20
-Swim Type: 
+Swim Type: Breaststroke
 Best training time: 18.55
 Training date: 11/05/2021
 Best competition time: 19.33
@@ -75,7 +77,7 @@ CPR-NR: 280501-2311
 *********************************
 Name: Kawan
 Age: 18
-Swim Type: 
+Swim Type: Crawl
 Best training time: 16.55
 Training date: 07/09/2020
 Best competition time: 17.32
@@ -86,7 +88,7 @@ CPR-NR: 061202-2111
 *********************************
 Name: Kawan
 Age: 25
-Swim Type: 29/09/2019
+Swim Type: Breaststroke
 Best training time: 20.55
 Training date: 13/11/2019
 Best competition time: 21.33
@@ -97,7 +99,7 @@ CPR-NR: 280396-2509
 *********************************
 Name: Kawan
 Age: 22
-Swim Type: 28/03/2019
+Swim Type: Crawl
 Best training time: 17.01
 Training date: 13/04/2020
 Best competition time: 17.22
@@ -108,7 +110,7 @@ CPR-NR: 280399-2211
 *********************************
 Name: Kawan
 Age: 22
-Swim Type: 10/03/2019
+Swim Type: Butterfly
 Best training time: 17.01
 Training date: 13/02/2020
 Best competition time: 17.22
@@ -119,7 +121,7 @@ CPR-NR: 130199-3355
 *********************************
 Name: Kawawn
 Age: 21
-Swim Type: Breast
+Swim Type: Breaststroke
 Best training time: 20.55
 Training date: 13/03/2020
 Best competition time: 21.33

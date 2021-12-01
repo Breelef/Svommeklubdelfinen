@@ -5,16 +5,25 @@ import java.io.*;
 public class Main {
     private static Member myMember = new Member();
     private static CompSwimmer mySwimmer = new CompSwimmer();
+    private static FreeSwimmer myFree = new FreeSwimmer();
+    private static SwimmerStats myStats = new SwimmerStats();
+    private static Payment myPayments = new Payment();
+
 
     public static void main(String[] args) throws IOException {
         ArrayList<Member> memberList = new ArrayList<>();
         ArrayList<CompSwimmer> compList = new ArrayList<>();
-        myMember.addMember(memberList);
-        mySwimmer.addMember(compList, memberList);
-
+        myMember.addToArray(memberList);
+        mySwimmer.addToArrays(compList);
+        //myStats.divisionSwimmers(compList);
+        //myMember.addMember(memberList);
+        //mySwimmer.addCompSwimmer(compList, memberList);
+        //myFree.addFreeSwimmer(memberList);
+        //myStats.divisionSwimmers(compList);
+        myPayments.showPayments();
         Scanner scan = new Scanner(System.in);
 
-        int answer = scan.nextInt();
+        /*int answer = scan.nextInt();
         while (answer < 3) {
             System.out.println("welcome to Svømme Delfin Klubben");
             System.out.println("Do you want to add a member(press 1), change memberInformation(press 2), cancel member(press 3), see compostionmembers(press 4), " +
@@ -30,10 +39,10 @@ public class Main {
                 answer = scan.nextInt();
                 switch (answer) {
                     case 1:
-                        Member newMemberComp = new CompSwimmer().addMember(compList, memberList);//laver et nyt objekt af typen Compswimmer, og kører metoden på objektet, og parameteroverfører de informationer som metoden skal indeholde.
+                        mySwimmer.addCompSwimmer(compList, memberList);//laver et nyt objekt af typen Compswimmer, og kører metoden på objektet, og parameteroverfører de informationer som metoden skal indeholde.
                         break;
                     case 2:
-                        Member newMemberFree = new FreeSwimmer().addMember(compList, memberList);//laver et nyt objekt af typen FreetupeSwimmer, etc.
+                        myFree.addFreeSwimmer(memberList);//laver et nyt objekt af typen FreetupeSwimmer, etc.
                         break;
                     default:
                         System.out.print("try again");
@@ -56,7 +65,8 @@ public class Main {
                     break;
                 case 3: //rygcrawl - write to file i en sorteret Array
                     break;
-                case 4: // brystsvømning - write to file i en sorteret Array                    break;
+                case 4: // brystsvømning - write to file i en sorteret Array
+                    break;
                 default:
                     System.out.print("try again");
                     break;
@@ -79,7 +89,8 @@ public class Main {
                         break;
                 }
 
-        }
+        }*/
+
     }
 
 }

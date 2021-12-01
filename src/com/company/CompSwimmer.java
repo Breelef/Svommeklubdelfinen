@@ -81,6 +81,7 @@ public class CompSwimmer extends Member{
     public void setCompDate(String compDate) {
         this.compDate = compDate;
     }
+
     public ArrayList<CompSwimmer> addCompSwimmer(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException {
         Scanner input = new Scanner(System.in);
         super.addMember(memberList);
@@ -102,7 +103,8 @@ public class CompSwimmer extends Member{
         System.out.println("Enter practice date for the best time: ");
         String pracDate = input.nextLine();
         CompSwimmer compAdd = new CompSwimmer(memberList.get(index - 1).getName(), memberList.get(index-1).getAge(),
-                memberList.get(index-1).getCPR(), true, memberList.get(index - 1).getStartMembership(), swimT, compTime, pracTime, compName, place, pracDate, compDate);
+                memberList.get(index-1).getCPR(), true, memberList.get(index - 1).getStartMembership(),
+                swimT, compTime, pracTime, compName, place, pracDate, compDate);
         System.out.println(compAdd);
         //Skriver til fil
         FileWriter fileWriter = new FileWriter("competitionSwimmers", true);
@@ -111,13 +113,6 @@ public class CompSwimmer extends Member{
         bufferedWriter.close();
         fileWriter.close();
         compList.add(compAdd);
-        System.out.println("Want to see a list of all the competition swimmers?");
-        String answer = input.nextLine();
-        if(answer.equalsIgnoreCase("yes")){
-            for (int i = 0; i < compList.size(); i++) {
-                System.out.println(compList.get(i));
-            }
-        }
         return compList;
     }
     public ArrayList<CompSwimmer> addToArrays(ArrayList<CompSwimmer> compList)throws IOException{
