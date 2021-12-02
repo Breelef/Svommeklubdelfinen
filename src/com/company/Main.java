@@ -9,23 +9,28 @@ public class Main {
     private static SwimmerStats myStats = new SwimmerStats();
     private static Payment myPayments = new Payment();
 
+
     public static void main(String[] args) throws IOException {
         ArrayList<Member> memberList = new ArrayList<>();
         ArrayList<CompSwimmer> compList = new ArrayList<>();
         myMember.addToArray(memberList);
         mySwimmer.addToArrays(compList);
-
         //myStats.divisionSwimmers(compList);
         //myMember.addMember(memberList);
         //mySwimmer.addCompSwimmer(compList, memberList);
         //myFree.addFreeSwimmer(memberList);
         //myStats.divisionSwimmers(compList);
         //myPayments.showPayments();
-        //myMember.addMember(memberList);
-        //mySwimmer.addCompSwimmer(compList, memberList);
-
+        //myPayments.showArrears(memberList);
+        myMember.editMember(memberList);
+        //mySwimmer.editCompSwimmer(compList);
         Scanner scan = new Scanner(System.in);
 
+        /*int answer = scan.nextInt();
+        while (answer < 3) {
+            System.out.println("welcome to Svømme Delfin Klubben");
+            System.out.println("Do you want to add a member(press 1), change memberInformation(press 2), cancel member(press 3), see compostionmembers(press 4), " +
+                    " ");
 
             System.out.println("*------------------------------------------------------------------------------------------*");
             System.out.println("|                           Welcome to Svømme klubben Delfinen                             |");
@@ -79,7 +84,20 @@ public class Main {
                 myStats.divisionSwimmers(compList);
                 answer = scan.nextInt();
                 break;
+            switch (answer) {
+                case 1: //butterfly - write to file i en sorteret Array
+                    break;
+                case 2: //crawl - write to file i en sorteret Array
+                    break;
+                case 3: //rygcrawl - write to file i en sorteret Array
+                    break;
+                case 4: // brystsvømning - write to file i en sorteret Array
+                    break;
+                default:
+                    System.out.print("try again");
+                    break;
 
+            }
 
             case 5:
                 //moneybalance

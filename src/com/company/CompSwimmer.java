@@ -166,7 +166,7 @@ public class CompSwimmer extends Member{
             if(line.contains("CPR-NR")){
                 CPR = line.split(":")[1].trim();
             }
-            if(line.contains("Membership date")){
+            if(line.contains("Date of membership")){
                 memberDate = line.split(":")[1].trim();
             }
             if(line.contains("*********************************")){
@@ -178,6 +178,68 @@ public class CompSwimmer extends Member{
         br.close();
         fr.close();
         return compList;
+    }
+    public void editCompSwimmer(ArrayList<CompSwimmer> compList)throws IOException{
+        Scanner scan = new Scanner(System.in);
+        for (int i = 0; i < compList.size(); i++) {
+            System.out.println("Nr. " + (i + 1) + "\n" + compList.get(i));
+        }
+        System.out.print("Enter the number of member you want to edit: ");
+        int changeNumber = scan.nextInt();
+        System.out.println();
+        CompSwimmer tempObject = compList.get((changeNumber - 1));
+        String changeList = tempObject.toString();
+        System.out.println("Member " + changeNumber + ":\n1 - Swim Type: " + compList.get(changeNumber-1).getSwimType()
+                + "\n2 - Best competition time: " + compList.get(changeNumber-1).getBestCompTime() +
+                "\n3 - Best training time: " + compList.get(changeNumber-1).getBestTrainingTime());
+
+        System.out.print("Enter the number of the information you want to edit: ");
+        System.out.println();
+        int infoNumber = scan.nextInt();
+        scan.nextLine();       //Stops the next line from getting "eaten"
+        switch (infoNumber) {
+            case 1:
+                System.out.print("Enter new Swim Type: ");
+                String swimT = scan.nextLine();
+                tempObject.setSwimType(swimT);
+                break;
+            case 2:
+                System.out.print("Enter new competition time");
+                double compTime = scan.nextDouble();
+                tempObject.setBestCompTime(compTime);
+                System.out.println("Enter date for new competition time");
+                String compDate = scan.nextLine();
+                tempObject.setCompDate(compDate);
+                System.out.println("Enter placement at competition");
+                int placement = scan.nextInt();
+                tempObject.setPlacement(placement);
+                System.out.println("Enter name of competition");
+                String compName = scan.nextLine();
+                tempObject.setCompName(compName);
+                break;
+            case 3:
+                System.out.println("Enter new training time");
+                double trainingTime = scan.nextDouble();
+                tempObject.setBestTrainingTime(trainingTime);
+                System.out.println("Enter date of new training time");
+                String trainingDate = scan.nextLine();
+                tempObject.setPracticeDate(trainingDate);
+                break;
+            default:
+                System.out.println("Number " + infoNumber + " is not not a valid option");
+                break;
+        }
+
+        System.out.println("\nSwimmer nr. " + changeNumber + " with the edit: ");
+        compList.set((changeNumber - 1), tempObject);
+        System.out.println(compList.get(changeNumber - 1));
+
+        //Prints the updated ArrayList to the file
+        FileWriter writer = new FileWriter("competitionSwimmers");
+        for (CompSwimmer p : compList) {
+            writer.write(p + System.lineSeparator());
+        }
+        writer.close();
     }
     public String toString(){
         /*String g = "";
@@ -196,8 +258,9 @@ public class CompSwimmer extends Member{
             }
         }*/
         return "Name: " + super.getName() + "\nAge: " + super.getAge() + "\nSwim Type: " + swimType + "\nBest training time: "
-                + bestTrainingTime + "\nTraining date: " + practiceDate + "\nBest competition time: " + bestCompTime + "\nName of competition: "
-                + compName + "\nPlacement: " + placement + "\nCompetition date: " + compDate + "\nCPR-NR: " + super.getCPR() + "\n*********************************";
+                + bestTrainingTime + "\nTraining date: " + practiceDate + "\nBest competition time: " + bestCompTime + "\nCompetition name: "
+                + compName + "\nPlacement: " + placement + "\nCompetition date: " + compDate + "\nCPR-NR: " + super.getCPR() +
+                "\nDate of membership: " + super.getStartMembership() + "\n*********************************";
     }
 }
 

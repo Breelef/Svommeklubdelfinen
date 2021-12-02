@@ -1,5 +1,6 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -62,7 +63,7 @@ public class Member {
         this.status = status;
     }
 
-    public ArrayList<Member> addMember(ArrayList<Member> memberList)throws IOException{
+    public void addMember(ArrayList<Member> memberList)throws IOException{
         Scanner input = new Scanner(System.in);
         int age = 0;
         System.out.println("Enter name: ");
@@ -93,22 +94,73 @@ public class Member {
         bufferedWriter.close();
         fileWriter.close();
         memberList.add(memberAdd);
-        return memberList;
     }
-    public void editMember(){
+    public void editMember(ArrayList<Member> memberList)throws IOException{
+        Scanner scan = new Scanner(System.in);
+        String g = "";
+        for (int i = 0; i < memberList.size(); i++) {
+            System.out.println("Nr. " + (i + 1) + "\n" + memberList.get(i));
+        }
+        System.out.print("Enter the number of member you want to edit: ");
+        int changeNumber = scan.nextInt();
+        System.out.println();
+        Member tempObject = memberList.get((changeNumber - 1));
+        String changeList = tempObject.toString();
+        if(memberList.get(changeNumber-1).isStatus()){
+            g = "Active membership";
+        }else{
+            g = "Passive membership";
+        }
+        System.out.println("Member " + changeNumber + ":\n1 - Name: " + memberList.get(changeNumber-1).getName()
+                + "\n2 - Membership: " + g + "\n3 - Date of membership: " + memberList.get(changeNumber-1).getStartMembership());
 
+        System.out.print("Enter the number of the information you want to edit: ");
+        System.out.println();
+        int infoNumber = scan.nextInt();
+        scan.nextLine();       //Stops the next line from getting "eaten"
+        switch (infoNumber) {
+            case 1:
+                System.out.print("Enter new name: ");
+                String name = scan.nextLine();
+                tempObject.setName(name);
+                break;
+            case 2:
+                System.out.print("Enter membership status (type false for passive membership, true for active membership): ");
+                boolean status = scan.nextBoolean();
+                tempObject.setStatus(status);
+                break;
+            case 3:
+                System.out.println("Enter new membership date: ");
+                String membership = scan.nextLine();
+                tempObject.setStartMembership(membership);
+                break;
+            default:
+                System.out.println("Number " + infoNumber + " is not not a valid option");
+                break;
+        }
+
+        System.out.println("\nMember nr. " + changeNumber + " with the edit: ");
+        memberList.set((changeNumber - 1), tempObject);
+        System.out.println(memberList.get(changeNumber - 1));
+
+        //Prints the updated ArrayList to the file
+        FileWriter writer = new FileWriter("Memberlist");
+        for (Member p : memberList) {
+            writer.write(p + System.lineSeparator());
+        }
+        writer.close();
     }
     public void deleteMember() {
 
     }
-    public ArrayList<Member> addToArray(ArrayList<Member> memberList)throws IOException{
+    public void addToArray(ArrayList<Member> memberList)throws IOException{
         FileReader fr = new FileReader("Memberlist");
         BufferedReader br = new BufferedReader(fr);
         String useMe = "";
         String Name = "";
         int age = 0;
         String CPR = "";
-        boolean status = false;
+        boolean status = true;
         String membership = "";
         String line;
         while ((line = br.readLine()) != null) {
@@ -124,9 +176,13 @@ public class Member {
             }
             if (line.contains("Membership")){
                 useMe = line.split(":")[1].trim();
-                status = useMe.equalsIgnoreCase("Active membership");
+                if(useMe.equalsIgnoreCase("Active membership")){
+                    status = true;
+                }else{
+                    status = false;
+                }
             }
-            if(line.contains("Membership date")){
+            if(line.contains("Date of membership")){
                 membership = line.split(":")[1].trim();
             }
             if(line.contains("*********************************")){
@@ -136,7 +192,6 @@ public class Member {
         }
         br.close();
         fr.close();
-        return memberList;
     }
 
     public String toString(){
@@ -160,6 +215,6 @@ public class Member {
             }
         }
         return "Name: " + name + "\nAge: " + age + "\nCPR-nr: " + CPR + "\nMembership: " + g + "" +
-                "\nPrice: " + price + "\nMembership date: " + startMembership + "\n*********************************";
+                "\nPrice: " + price + "\nDate of membership: " + startMembership + "\n*********************************";
     }
 }
