@@ -5,11 +5,13 @@ public class SwimmerStats {
 
     public void divisionSwimmers(ArrayList<CompSwimmer> compList){
         Scanner input = new Scanner (System.in);
-        System.out.println("" +
-                "Press 1 for Butterfly" +
-                "\nPress 2 for Crawl" +
-                "\nPress 3 for Backstroke" +
-                "\nPress 4 for Breaststroke");
+        System.out.print("*----------------------------*");
+        System.out.print("| For Butterfly    (press 1) |");
+        System.out.print("| For Crawl        (press 2) |");
+        System.out.print("| For backstroke   (press 3) |");
+        System.out.print("| For breaststroke (Press 4) |");
+        System.out.print("*----------------------------*");
+
         int answer = input.nextInt();
         switch (answer) {
             case 1:
