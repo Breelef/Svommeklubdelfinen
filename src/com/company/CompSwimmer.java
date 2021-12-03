@@ -188,7 +188,6 @@ public class CompSwimmer extends Member{
         int changeNumber = scan.nextInt();
         System.out.println();
         CompSwimmer tempObject = compList.get((changeNumber - 1));
-        String changeList = tempObject.toString();
         System.out.println("Member " + changeNumber + ":\n1 - Swim Type: " + compList.get(changeNumber-1).getSwimType()
                 + "\n2 - Best competition time: " + compList.get(changeNumber-1).getBestCompTime() +
                 "\n3 - Best training time: " + compList.get(changeNumber-1).getBestTrainingTime());

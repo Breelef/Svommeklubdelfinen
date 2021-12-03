@@ -15,6 +15,7 @@ public class SwimmerStats {
         int answer = input.nextInt();
         switch (answer) {
             case 1:
+                System.out.println("Coach: Karsten");
                 for (int i = 0; i < compList.size(); i++) {
                     if (compList.get(i).getSwimType().equals("Butterfly")) {
                         compList.sort(Comparator.comparing(CompSwimmer::getBestCompTime));
@@ -23,6 +24,7 @@ public class SwimmerStats {
                 }
                 break;
             case 2:
+                System.out.println("Coach: Jørgen");
                 for (int i = 0; i < compList.size(); i++) {
                     if (compList.get(i).getSwimType().equals("Crawl")) {
                         compList.sort(Comparator.comparing(CompSwimmer::getBestCompTime));
@@ -31,6 +33,7 @@ public class SwimmerStats {
                 }
                 break;
             case 3:
+                System.out.println("Coach: Michael");
                 for (int i = 0; i < compList.size(); i++) {
                 if (compList.get(i).getSwimType().equals("Backstroke")) {
                     compList.sort(Comparator.comparing(CompSwimmer::getBestCompTime));
@@ -39,6 +42,7 @@ public class SwimmerStats {
             }
                 break;
             case 4:
+                System.out.println("Coach: Hardy");
                 for (int i = 0; i < compList.size(); i++) {
                 if (compList.get(i).getSwimType().equals("Breaststroke")) {
                     compList.sort(Comparator.comparing(CompSwimmer::getBestCompTime));

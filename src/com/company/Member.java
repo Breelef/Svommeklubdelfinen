@@ -105,7 +105,6 @@ public class Member {
         int changeNumber = scan.nextInt();
         System.out.println();
         Member tempObject = memberList.get((changeNumber - 1));
-        String changeList = tempObject.toString();
         if(memberList.get(changeNumber-1).isStatus()){
             g = "Active membership";
         }else{
@@ -150,8 +149,33 @@ public class Member {
         }
         writer.close();
     }
-    public void deleteMember() {
-
+    public void deleteMember(ArrayList<Member> memberList, ArrayList<CompSwimmer> compList)throws IOException {
+        Scanner input = new Scanner(System.in);
+        int i = 1;
+        int answer = 0;
+        for (Member member : memberList) {
+            System.out.println(i + ". " + member);
+            i++;
+        }
+        System.out.println("Which member would you like to delete?");
+        answer = input.nextInt();
+        for(int k = 0; k < compList.size(); k++){
+            if(memberList.get(answer-1).getCPR().equals(compList.get(k).getCPR())){
+                compList.remove(k);
+            }
+        }
+        memberList.remove(answer - 1);
+        //Overwrite file with updated memberlist
+        FileWriter writer = new FileWriter("Memberlist");
+        for (Member p : memberList) {
+            writer.write(p + System.lineSeparator());
+        }
+        writer.close();
+        FileWriter writerComp = new FileWriter("competitionSwimmers");
+        for (CompSwimmer p : compList) {
+            writerComp.write(p + System.lineSeparator());
+        }
+        writer.close();
     }
     public void addToArray(ArrayList<Member> memberList)throws IOException{
         FileReader fr = new FileReader("Memberlist");
@@ -192,6 +216,11 @@ public class Member {
         }
         br.close();
         fr.close();
+    }
+    public void showMembers(ArrayList<Member> memberList){
+        for(Member member : memberList){
+            System.out.println(member);
+        }
     }
 
     public String toString(){
