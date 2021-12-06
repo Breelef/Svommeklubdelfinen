@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    // Der skal kaldes en static instance af klassen
     private static Member myMember = new Member();
     private static CompSwimmer mySwimmer = new CompSwimmer();
     private static FreeSwimmer myFree = new FreeSwimmer();
@@ -11,8 +12,10 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
+        //Arraylister af members og competition swimmers
         ArrayList<Member> memberList = new ArrayList<>();
         ArrayList<CompSwimmer> compList = new ArrayList<>();
+        //Læser fra filer og læser ind i Arraylister
         myMember.addToArray(memberList);
         mySwimmer.addToArrays(compList);
         int answer = 0;
@@ -24,14 +27,15 @@ public class Main {
         System.out.println("|   For the trainers, there will be an easy access for the top swimmers in there division. |");
         System.out.println("|                      And how they did in the previous tournaments                        |");
         System.out.println("*------------------------------------------------------------------------------------------*");
-        System.out.println("                                  |                      |        ");
-        System.out.println("                                  |                      |        ");
-        System.out.println("                         *---------------------------------------*");
-        System.out.println("                         | Do you want to add a member (press 1) |");
-        System.out.println("                         | Change memberInformation    (press 2) |");
-        System.out.println("                         | Edit membership             (press 3) |");
-        System.out.println("                         | See competition members     (press 4) |");
-        System.out.println("                         *---------------------------------------*");
+        System.out.println("                                  |                      |                                  ");
+        System.out.println("                                  |                      |                                  ");
+        System.out.println("                         *---------------------------------------*                          ");
+        System.out.println("                         | Do you want to add a member (press 1) |                          ");
+        System.out.println("                         | Change memberInformation    (press 2) |                          ");
+        System.out.println("                         | Edit membership             (press 3) |                          ");
+        System.out.println("                         | See competition members     (press 4) |                          ");
+        System.out.println("                         | Accounting                  (press 5) |                          ");
+        System.out.println("                         *---------------------------------------*                          ");
 
         answer = scan.nextInt();
         if (answer > 6) {
@@ -63,10 +67,10 @@ public class Main {
                     answer = scan.nextInt();
                     switch (answer) {
                         case 1:
-                            myMember.editMember(memberList);
+                            myMember.editMember(memberList); //Kan redigerer et member objekt
                             break;
                         case 2:
-                            mySwimmer.editCompSwimmer(compList);
+                            mySwimmer.editCompSwimmer(compList); //Kan redigerer et compSwimmer objekt
                             break;
                         default:
                             System.out.println("ERROR CODE 404");

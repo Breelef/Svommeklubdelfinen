@@ -241,76 +241,15 @@ public class CompSwimmer extends Member{
         writer.close();
     }
     public String toString(){
-        /*String g = "";
-        int price = 0;
-        if(isStatus()){
-            g = "Active membership";
+        String group = "";
+        if(super.getAge() >= 18){
+            group = "Senior";
         }else{
-            g = "Passive membership";
+            group = "Junior";
         }
-        if(getAge() < 18){
-            price = 1000;
-        }else{
-            price = 1600;
-            if(getAge() >= 60){
-                price = 1200;
-            }
-        }*/
         return "Name: " + super.getName() + "\nAge: " + super.getAge() + "\nSwim Type: " + swimType + "\nBest training time: "
                 + bestTrainingTime + "\nTraining date: " + practiceDate + "\nBest competition time: " + bestCompTime + "\nCompetition name: "
                 + compName + "\nPlacement: " + placement + "\nCompetition date: " + compDate + "\nCPR-NR: " + super.getCPR() +
-                "\nDate of membership: " + super.getStartMembership() + "\n*********************************";
+                "\nDate of membership: " + super.getStartMembership() + "\nGroup: " + group + "\n*********************************";
     }
 }
-
-/*
-Scanner input = new Scanner(System.in);
-        System.out.println("Enter name: ");
-        String nameT = input.nextLine();
-        System.out.println("Enter age: ");
-        int age = input.nextInt();
-        System.out.println("Enter CPR-nr: ");
-        int CPRnr = input.nextInt();
-        System.out.println("""
-                    Enter true for active membership
-                    Enter false for passive membership""");
-        boolean status = input.nextBoolean();
-        public ArrayList<CompSwimmer> addMember(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException {
-        Scanner input = new Scanner(System.in);
-        super.addMember(memberList);
-        System.out.println("Enter swimtype: ");
-        String swimT = input.next();
-        System.out.println("Enter best competition time: ");
-        double compTime = input.nextDouble();
-        System.out.println("Enter placement at the competition");
-        int place = input.nextInt();
-        input.nextLine();
-        System.out.println("Enter competition date for the best time: ");
-        String compDate = input.nextLine();
-        System.out.println("Enter name of competition: ");
-        String compName = input.nextLine();
-        System.out.println("Enter best practice time: ");
-        double pracTime = input.nextDouble();
-        input.nextLine();
-        System.out.println("Enter practice date for the best time: ");
-        String pracDate = input.nextLine();
-        CompSwimmer memberAdd = new CompSwimmer(super.getName(), super.getAge(), super.getCPR(), super.isStatus(), swimT, compTime,
-                pracTime, compName, place, pracDate, compDate);
-        System.out.println(memberAdd);
-        //Skriver til fil
-        FileWriter fileWriter = new FileWriter("compSwimmers", true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(memberAdd + "\n");
-        bufferedWriter.close();
-        fileWriter.close();
-        compList.add(memberAdd);
-        System.out.println("Want to see a list of all the competition swimmers?");
-        String answer = input.nextLine();
-        if(answer.equalsIgnoreCase("yes")){
-            for (int i = 0; i < compList.size(); i++) {
-                System.out.println(compList.get(i));
-            }
-        }
-        return compList;
-    }
- */

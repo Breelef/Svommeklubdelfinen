@@ -31,18 +31,3 @@ public class Payment {
         }
     }
 }
-/*FileReader fr = new FileReader("Memberlist");
-        BufferedReader br = new BufferedReader(fr);
-        String line;
-        String useMe = "";
-        while((line = br.readLine()) != null){
-            if(line.contains("Membership date")){
-                useMe = line.split(":")[1].trim();
-                int day = Integer.parseInt(useMe.substring(0,2));
-                int month = Integer.parseInt(useMe.substring(3,5));
-                int year = Integer.parseInt(useMe.substring(6,8));
-                if(day < 13 && month == 12 || day > 13 && month < 12){
-
-                }
-            }
-        }*/

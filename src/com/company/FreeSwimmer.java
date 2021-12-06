@@ -21,7 +21,6 @@ public class FreeSwimmer extends Member {
     }
 
     public ArrayList<Member> addFreeSwimmer(ArrayList<Member> memberList) throws IOException{
-        Scanner input = new Scanner(System.in);
         super.addMember(memberList);
         FreeSwimmer addSwimmer = new FreeSwimmer(memberList.get(memberList.size()-1).getName(), memberList.get(memberList.size()-1).getAge(),
                 memberList.get(memberList.size()-1).getCPR(), true, memberList.get(memberList.size()-1).getStartMembership(), "Recreational swimmer");
