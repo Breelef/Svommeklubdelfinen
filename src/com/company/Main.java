@@ -9,6 +9,9 @@ public class Main {
     private static FreeSwimmer myFree = new FreeSwimmer();
     private static SwimmerStats myStats = new SwimmerStats();
     private static Payment myPayments = new Payment();
+    static Scanner scan = new Scanner(System.in);// gør objektet tillgængeligt flere steder. - static metoder skal ha static variabler.
+
+
 
 
     public static void main(String[] args) throws IOException {
@@ -19,7 +22,7 @@ public class Main {
         myMember.addToArray(memberList);
         mySwimmer.addToArrays(compList);
         int answer = 0;
-        Scanner scan = new Scanner(System.in);
+
         System.out.println("*------------------------------------------------------------------------------------------*");
         System.out.println("|                           Welcome to Svømme klubben Delfinen                             |");
         System.out.println("|                   This program is used for easy overview of the members                  |");
@@ -38,78 +41,99 @@ public class Main {
         System.out.println("                         *---------------------------------------*                          ");
 
         answer = scan.nextInt();
-        if (answer > 6) {
-            System.out.println(answer + " ERROR CODE 404");
-        } else {
-            switch (answer) {
-                case 1:
-                    System.out.println("*---------------------------------------*");
-                    System.out.println("| Add a competition swimmer   (press 1) |");
-                    System.out.println("| Add leisure swimmer         (press 2) |");
-                    System.out.println("*---------------------------------------*");
-                    answer = scan.nextInt();
-                    switch (answer) {
-                        case 1:
-                            mySwimmer.addCompSwimmer(compList, memberList);//laver et nyt objekt af typen Compswimmer, og kører metoden på objektet, og parameteroverfører de informationer som metoden skal indeholde.
+        while(answer > 6) {
+            if (answer > 6) {
+                System.out.println(answer + " ERROR CODE 404");
+            } else {
+                switch (answer) {
+                    case 1:
+                        addCompFreetimeSwimmer(compList, memberList);
+                        break;
+                    case 2:
+                        editSwimInfo(memberList, compList);
+                        break;
+                    case 3://delete member
+                        myMember.deleteMember(memberList, compList);
+                        break;
+                    case 4: //see positionSwimmers and pick.
+                        myStats.divisionSwimmers(compList);
+                        break;
+                    case 5:
+                        //moneybalance
+                            moneyBalanceTotal(memberList);
                             break;
-                        case 2:
-                            myFree.addMember(memberList);//laver et nyt objekt af typen FreetupeSwimmer, etc.
-                            break;
-                        default:
-                            System.out.print("ERROR CODE 404");
-                            break;
-                    }
-                case 2:
-                    System.out.println("*---------------------------------------------*");
-                    System.out.println("| Edit a competition swimmer info   (press 1) |");
-                    System.out.println("| Edit member info                  (press 2) |");
-                    System.out.println("*---------------------------------------------*");
-                    answer = scan.nextInt();
-                    switch (answer) {
-                        case 1:
-                            myMember.editMember(memberList); //Kan redigerer et member objekt
-                            break;
-                        case 2:
-                            mySwimmer.editCompSwimmer(compList); //Kan redigerer et compSwimmer objekt
-                            break;
-                        default:
-                            System.out.println("ERROR CODE 404");
-                            break;
-                    }
-                    break;
-                case 3://delete member
-                    myMember.deleteMember(memberList, compList);
-                    break;
-                case 4: //see positionSwimmers and pick.
-                    myStats.divisionSwimmers(compList);
-                    break;
-
-                case 5:
-                    //moneybalance
-                    System.out.println("*------------------------------------*");
-                    System.out.println("| See full membershiplist  (press 1) |");
-                    System.out.println("| See members arreaslist   (press 2) |");
-                    System.out.println("| Get total balancerapport (press 3) |");
-                    System.out.println("*------------------------------------*");
-                    answer = scan.nextInt();
-                    switch (answer) {
-                        case 1: // see full memberlist -
-                            myMember.showMembers(memberList);
-                            break;
-                        case 2://memberlist of people in arrear(who didn't pay).
-                            myPayments.showArrears(memberList);
-                            break;
-                        case 3://printing out balancerapport : expected total balanceamount for the incoming year
-                            myPayments.showPayments();
-                            break;
-                        default:
-                            System.out.println("ERROR CODE 404");
-                            break;
-                    }
-                default:
-                    System.out.println("ERROR CODE 404");
-                    break;
+                    default:
+                        System.out.println("ERROR CODE 404");
+                        break;
+                }
             }
         }
     }
+    public static void addCompFreetimeSwimmer(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException{
+        System.out.println("*---------------------------------------*");
+        System.out.println("| Add a competition swimmer   (press 1) |");
+        System.out.println("| Add leisure swimmer         (press 2) |");
+        System.out.println("*---------------------------------------*");
+
+
+        int answer = scan.nextInt();
+        switch (answer){
+            case 1:
+                mySwimmer.addCompSwimmer(compList, memberList);//laver et nyt objekt af typen Compswimmer, og kører metoden på objektet, og parameteroverfører de informationer som metoden skal indeholde.
+                break;
+            case 2:
+                myFree.addMember(memberList);//laver et nyt objekt af typen FreetupeSwimmer, etc.
+                break;
+            default:
+                System.out.print("ERROR CODE 404");
+                break;
+        }
+
+
+    }
+
+    public static void editSwimInfo(ArrayList<Member> memberList, ArrayList<CompSwimmer> compList) throws IOException{
+        System.out.println("*---------------------------------------------*");
+        System.out.println("| Edit a competition swimmer info   (press 1) |");
+        System.out.println("| Edit member info                  (press 2) |");
+        System.out.println("*---------------------------------------------*");
+        int answer=scan.nextInt();
+        switch(answer){
+            case 1:
+                myMember.editMember(memberList); //Kan redigerer et member objekt
+                break;
+            case 2:
+                mySwimmer.editCompSwimmer(compList); //Kan redigerer et compSwimmer objekt
+                break;
+            default:
+                System.out.println("ERROR CODE 404");
+                break;
+        }
+    }
+public static void moneyBalanceTotal(ArrayList<Member> memberList) throws IOException{
+
+        System.out.println("*------------------------------------*");
+        System.out.println("| See full membershiplist  (press 1) |");
+        System.out.println("| See members arreaslist   (press 2) |");
+        System.out.println("| Get total balancerapport (press 3) |");
+        System.out.println("*------------------------------------*");
+
+        int answer=scan.nextInt();
+            switch(answer){
+                case 1: // see full memberlist -
+                    myMember.showMembers(memberList);
+                    break;
+                case 2://memberlist of people in arrear(who didn't pay).
+                    myPayments.showArrears(memberList);
+                    break;
+                case 3://printing out balancerapport : expected total balanceamount for the incoming year
+                    myPayments.showPayments();
+                    break;
+                default:
+                    System.out.println("ERROR CODE 404");
+                    break;
+        }
+    }
 }
+
+
