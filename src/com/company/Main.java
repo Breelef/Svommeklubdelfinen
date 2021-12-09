@@ -22,52 +22,51 @@ public class Main {
         myMember.addToArray(memberList);
         mySwimmer.addToArrays(compList);
         int answer = 0;
+        do{
+            System.out.println("*------------------------------------------------------------------------------------------*");
+            System.out.println("|                           Welcome to Svømme klubben Delfinen                             |");
+            System.out.println("|                   This program is used for easy overview of the members                  |");
+            System.out.println("|   You can the full memberlist, the members that has payed, and with members is in arreas.|");
+            System.out.println("|   For the trainers, there will be an easy access for the top swimmers in there division. |");
+            System.out.println("|                      And how they did in the previous tournaments                        |");
+            System.out.println("*------------------------------------------------------------------------------------------*");
+            System.out.println("                                  |                      |                                  ");
+            System.out.println("                                  |                      |                                  ");
+            System.out.println("                         *---------------------------------------*                          ");
+            System.out.println("                         | Do you want to add a member (press 1) |                          ");
+            System.out.println("                         | Change memberInformation    (press 2) |                          ");
+            System.out.println("                         | Edit membership             (press 3) |                          ");
+            System.out.println("                         | See competition members     (press 4) |                          ");
+            System.out.println("                         | Accounting                  (press 5) |                          ");
+            System.out.println("                         *---------------------------------------*                          ");
 
-        System.out.println("*------------------------------------------------------------------------------------------*");
-        System.out.println("|                           Welcome to Svømme klubben Delfinen                             |");
-        System.out.println("|                   This program is used for easy overview of the members                  |");
-        System.out.println("|   You can the full memberlist, the members that has payed, and with members is in arreas.|");
-        System.out.println("|   For the trainers, there will be an easy access for the top swimmers in there division. |");
-        System.out.println("|                      And how they did in the previous tournaments                        |");
-        System.out.println("*------------------------------------------------------------------------------------------*");
-        System.out.println("                                  |                      |                                  ");
-        System.out.println("                                  |                      |                                  ");
-        System.out.println("                         *---------------------------------------*                          ");
-        System.out.println("                         | Do you want to add a member (press 1) |                          ");
-        System.out.println("                         | Change memberInformation    (press 2) |                          ");
-        System.out.println("                         | Edit membership             (press 3) |                          ");
-        System.out.println("                         | See competition members     (press 4) |                          ");
-        System.out.println("                         | Accounting                  (press 5) |                          ");
-        System.out.println("                         *---------------------------------------*                          ");
-
-        answer = scan.nextInt();
-        while(answer > 6) {
-            if (answer > 6) {
+            answer = scan.nextInt();
+            if (answer > 6 && answer < 1) {
                 System.out.println(answer + " ERROR CODE 404");
             } else {
-                switch (answer) {
-                    case 1:
-                        addCompFreetimeSwimmer(compList, memberList);
-                        break;
-                    case 2:
-                        editSwimInfo(memberList, compList);
-                        break;
-                    case 3://delete member
-                        myMember.deleteMember(memberList, compList);
-                        break;
-                    case 4: //see positionSwimmers and pick.
-                        myStats.divisionSwimmers(compList);
-                        break;
-                    case 5:
-                        //moneybalance
-                            moneyBalanceTotal(memberList);
+                    switch (answer) {
+                        case 1:
+                            addCompFreetimeSwimmer(compList, memberList);
                             break;
-                    default:
-                        System.out.println("ERROR CODE 404");
-                        break;
+                        case 2:
+                            editSwimInfo(memberList, compList);
+                            break;
+                        case 3://delete member
+                            myMember.deleteMember(memberList, compList);
+                            break;
+                        case 4: //see positionSwimmers and pick.
+                            myStats.divisionSwimmers(compList);
+                            break;
+                        case 5:
+                            //moneybalance
+                                moneyBalanceTotal(memberList);
+                                break;
+                        default:
+                            System.out.println("ERROR CODE 404");
+                            break;
+                    }
                 }
-            }
-        }
+            }while(answer < 6);
     }
     public static void addCompFreetimeSwimmer(ArrayList<CompSwimmer> compList, ArrayList<Member> memberList) throws IOException{
         System.out.println("*---------------------------------------*");
@@ -88,8 +87,6 @@ public class Main {
                 System.out.print("ERROR CODE 404");
                 break;
         }
-
-
     }
 
     public static void editSwimInfo(ArrayList<Member> memberList, ArrayList<CompSwimmer> compList) throws IOException{
